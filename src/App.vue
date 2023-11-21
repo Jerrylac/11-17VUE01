@@ -10,18 +10,21 @@ import Header from './components/Header.vue'
   
   <div class="content">
     
+    <RouterView />
   </div>
-  <RouterView />
 </template>
 
-<style scoped>
+<style scoped>  
+
 .header{
   width: 100vw;
   height: 15vh;
 }
 .content{
-  width: 100vw;
-  height: 85vh;
+  width: 100vmax;
+  height: 100vmax;
   background-color: #635985;
+  text-align: center;
+  color: #fff;
 }
 </style>
