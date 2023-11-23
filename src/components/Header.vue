@@ -1,5 +1,7 @@
 <script>
 import { RouterLink, RouterView } from 'vue-router'
+import { mapState,mapActions } from 'pinia';
+import counter from '../stores/counter';
 export default{
     data(){
         return{
@@ -9,6 +11,9 @@ export default{
     components:{
         RouterLink,
         // RouterView
+    },
+    computed:{
+        ...mapState(counter,["location","locationInfo"])
     }
 }
 </script>
@@ -20,7 +25,11 @@ export default{
     <RouterLink to="/Vfor" class="link">V-for</RouterLink>
     <RouterLink to="/Von" class="link">V-on</RouterLink>
     <RouterLink to="/test" class="link">test</RouterLink>
+    <RouterLink to="/Vbind" class="link">V-bind</RouterLink>
 </div>
+<span> {{ location }}</span>
+<span> {{ locationInfo }}</span>
+
 </template>
 
 <style scoped lang="scss">
