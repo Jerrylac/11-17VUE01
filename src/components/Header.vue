@@ -26,6 +26,8 @@ export default{
     <RouterLink to="/Von" class="link" >V-on</RouterLink>
     <RouterLink to="/test" class="link" >test</RouterLink>
     <RouterLink to="/Vbind" class="link" >V-bind</RouterLink>
+    <RouterLink to="/VifAndVshow" class="link" >V-if And V-show</RouterLink>
+    <RouterLink to="/WatchAndComputed" class="link" >WatchAndComputed</RouterLink>
 </div>
 <span> {{ location }}</span>
 <span> {{ locationInfo }}</span>

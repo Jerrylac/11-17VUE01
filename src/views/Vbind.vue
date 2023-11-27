@@ -7,9 +7,21 @@ export default{
             isLarge:false,
             styleArr:[],
             imgText:"",
-            arrTest:[1,2,3,4,5,6,7,8,9,10]
+            arrTest:[1,2,3,4,5,6,7,8,9,10],
+            arr:""
         }
     },
+    methods:{
+        test(){
+            
+            this.arr="https://media.discordapp.net/attachments/681432969960882178/1002944474978197534/3827eb802b3a5735.png?ex=65747854&is=65620354&hm=2414714a336c37b2fcd47d68da34d7d8e4685c1dafb8cbb8b285211ad43c4544&=&format=webp&width=1168&height=585"
+            
+        },
+        test1(){
+            this.arr=""
+        }
+    }
+
     
 }
 </script>
@@ -58,7 +70,10 @@ export default{
             <option value="">請選擇</option>
             <option :value="item" v-for="item in arrTest">{{ item }}</option>
         </select>
-
+<br><br>
+        <button type="button" @click="test()">1323</button>
+        <button type="button" @click="test1()">1323</button>
+        <img :src="arr" alt="">
 </template>
 
 <style scoped lang="scss">
