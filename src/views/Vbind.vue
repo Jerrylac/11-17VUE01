@@ -6,7 +6,8 @@ export default{
             isBlue:false,
             isLarge:false,
             styleArr:[],
-            imgText:""
+            imgText:"",
+            arrTest:[1,2,3,4,5,6,7,8,9,10]
         }
     },
     
@@ -52,6 +53,11 @@ export default{
 <br>
 <br>
         <img :src="imgText" alt="">
+<br>
+        <select name="" id="">
+            <option value="">請選擇</option>
+            <option :value="item" v-for="item in arrTest">{{ item }}</option>
+        </select>
 
 </template>
 

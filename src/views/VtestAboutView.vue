@@ -23,6 +23,9 @@ export default{
   },
   methods:{
     ...mapActions(counter,["getLocation","setLocation","getf"])
+  },
+  mounted(){
+    this.setLocation(2)
   }
 }
 </script>
