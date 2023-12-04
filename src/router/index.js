@@ -64,7 +64,57 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/WatchAndComputed.vue')
+    },
+    {
+      path: '/Props',
+      name: 'Props',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/Props.vue')
+    },
+    {
+      path: '/Accountinglogin',
+      name: 'Accountinglogin',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/Accountinglogin.vue')
+    },
+    {
+      path: '/AccountingMain',
+      name: 'AccountingMain',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/AccountingMain.vue')
+    },
+    {
+      path: '/AccountingSignUp',
+      name: 'AccountingSignUp',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/AccountingSignUp.vue')
+    },
+    {
+      path: '/Emit',
+      name: 'Emit',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/Emit.vue')
+    },
+    {
+      path: '/DataFlow',
+      name: 'DataFlow',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/DataFlow.vue')
     }
+
+    
   ]
 })
 

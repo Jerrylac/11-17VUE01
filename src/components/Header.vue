@@ -28,6 +28,13 @@ export default{
     <RouterLink to="/Vbind" class="link" >V-bind</RouterLink>
     <RouterLink to="/VifAndVshow" class="link" >V-if And V-show</RouterLink>
     <RouterLink to="/WatchAndComputed" class="link" >WatchAndComputed</RouterLink>
+    <RouterLink to="/Props" class="link" >Props</RouterLink>
+    <RouterLink to="/Accountinglogin" class="link" >記帳</RouterLink>
+</div>
+<div class="headerSowh">
+    <RouterLink to="/Emit" class="link" >Emit</RouterLink>
+    <RouterLink to="/DataFlow" class="link" >DataFlow</RouterLink>
+
 </div>
 <span> {{ location }}</span>
 <span> {{ locationInfo }}</span>
@@ -37,9 +44,10 @@ export default{
 <style scoped lang="scss">
 .headerSowh{
     width: 100%;
-    height: 100%;
+    height: 50%;
     font-size: 30px;
     background-color: #E19898;
+    margin-bottom: 0px;
     
 }
 a{
