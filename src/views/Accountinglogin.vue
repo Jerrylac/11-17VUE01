@@ -52,6 +52,9 @@ export default{
         goAcc(zzz){
             this.signUp=zzz
         },
+        logUp(up){
+            this.accMain=up
+        },
         goAccountingSignUp(){
             this.signUp=true
         },
@@ -95,7 +98,7 @@ export default{
     </div>
 </div>
     <AccountingSignUp @orange="getSignUp" @accGo="goAcc"  v-show="signUp==true"/>
-    <AccountingMain  v-if="accMain==true" v-bind:acc="this.acc"/>
+    <AccountingMain @logUp="logUp"  v-if="accMain==true" v-bind:acc="this.acc"/>
     
 </template>
 <style scoped lang="scss">

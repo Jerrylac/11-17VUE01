@@ -3,79 +3,81 @@ export default{
     data(){
         return{
             obj:[],
+            objArr:[],
             text:"",
             amount:"",
-            id:0,
             err:"",
             total:"",
             num:"",
+            tot:"income",
+            moy:"",
             income:0,
             expense:0,
-            moy:""
+            longUpTest:""
         }
         
     },
     props:[
         "acc"
     ],
-    methods:{
-        gatMoy(){
-            const formcontrol=document.querySelectorAll("input")
-            this.num=0
-            formcontrol.forEach(item=>{
-                if(item.value.length==0){
-                    this.err="請確認是否已填寫完畢"
-                }
-                else{
-                    this.err=""
-                }
-                this.num++
-            })
-            if(this.num==formcontrol.length){
-                this.obj.push({text:this.text,amout:this.amount,id:this.id++})
-                localStorage.setItem("Accounting",JSON.stringify(this.obj))
-                // this.err=""
-                // this.obj.amout=this.amount
-                // console.log(this.obj);
-                // console.log(typeof (this.sum));
+    computed:{
+        getMoy(){
+            let inc=this.income
+            let exp=this.expense
+            this.obj.forEach(item=>{
+            if(item.type==="income"){
+                inc+=item.amout
+            }else{
+                exp+=item.amout
             }
-            if(this.amount<0){
-                this.expense+=this.amount
-            }
-            if(this.amount>0){
-                this.income+=this.amount
-            }
-            
-
+        })
+        return {inc,exp}
         },
+    },
+    mounted(){
+        this.loadData()
+    },
+    methods:{
+        
         delinp(){
             this.text=""
             this.amount=""
         },
-        delbtn(e){
-            this.obj.forEach((item,index)=>{
-                
-                if(item.id==e.currentTarget.value){
-                    console.log(this.obj);
-                    this.obj.splice(index,1)
-                }
-            })
+        delbtn(index){
+            console.log(index);
+            
+            const btnDelete=window.confirm("確定要刪除嗎?")
+            if(btnDelete){
+                this.obj.splice(index,1)
+                console.log(this.obj);
+                localStorage.setItem("Accounting",JSON.stringify(this.obj))
+            }
         },
         totalAmount(){
             let dataCosts=JSON.parse(localStorage.getItem("Accounting"))
-            let sum=0;
-            // dataCosts.forEach(item=>{
-            //     // console.log(item);
-            //     sum+=item.amount
-            // })
-            this.obj.forEach(item=>{
-                // console.log(item.amout);
-                sum+=item.amout
-            })
+            let sum=this.getMoy.inc-this.getMoy.exp;
             return sum
             
+        },
+        
+        saveData(){
+            this.obj.push({text:this.text,amout:this.amount,type:this.tot})
+            
+            localStorage.setItem("Accounting",JSON.stringify(this.obj))
+            
+            
+        },
+        loadData(){
+            const saved=JSON.parse(localStorage.getItem("Accounting"))||[]
+            this.obj=saved
+        },
+        longUp(){
+            this.longUpTest=false
+            this.$emit("logUp",this.longUpTest)
         }
-    }
+        
+    },
+    
     
 }
 </script>
@@ -92,20 +94,23 @@ export default{
             <p>YOUR BALANCE</p>
             <span>${{ totalAmount() }}</span>
         </div>
-
+        <div class="btnBox">
+            <button type="button" @click="this.longUp()"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+        </div>
+        
     </div>
     <div class="right">
         <h1 class="errText">{{ this.err }}</h1>
         <div class="top">
-            <div class="ct">
+            <div class="ct1">
                 <p>INCOME </p>
                 <p>收入</p>
-                <p>{{ this.income }}</p>
+                <p>{{ getMoy.inc }}</p>
             </div>
-            <div class="ct">
+            <div class="ct2">
                 <p>EXPENSE </p>
                 <p>支出</p>
-                <p>{{ this.expense }}</p>
+                <p>{{ getMoy.exp }}</p>
             </div>
         </div>
         <div class="addBtn">
@@ -113,10 +118,10 @@ export default{
             <button type="button" @click="delinp()" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Add transaction</button>
 
         </div>
-        <div class="box" v-for="item in obj">
+        <div class="box" v-for="(item,index) in obj">
                 <p class="text">{{ item.text }}</p>
                 <p class="amout">{{ item.amout }}</p>
-                <button type="button" class="btn" @click="delbtn">Delete</button>
+                <button type="button" class="btn" @click="delbtn(index)">Delete</button>
 
         </div>
 
@@ -138,10 +143,16 @@ export default{
             <label for="message-text" class="col-form-label">Amount</label>
             <input type="number" class="form-control aaa" id="recipient-name" v-model="this.amount">
           </div>
+          <span>收入</span>
+          <input type="radio" name="tot" id="" value="income" v-model="this.tot">
+          <span>支出</span>
+          <input type="radio" name="tot" id="" value="expense" v-model="this.tot">
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="gatMoy()">Add transaction</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="saveData()">Add transaction 收入</button>
+          
+        
       </div>
     </div>
   </div>
@@ -156,6 +167,28 @@ export default{
         width: 30%;
         height: 100%;
         background-color: #161A30;
+        .btnBox{
+            width: 20%;
+            margin-top: 50%;
+            margin-left: 10%;
+            // background-color: aqua;
+            button{
+                width: 6vmin;  
+                margin-left: 0px;
+                background-color: #F0ECE5;
+                border-radius: 10px;
+                opacity: 0.5;
+                .fa-arrow-right-from-bracket{
+                    font-size: 30px;
+                    color: #161A30;
+                }
+            }&:hover{
+                button{
+                    opacity: 1;
+                }
+            }
+
+        }
     }
     .right{
         width: 70%;
@@ -166,11 +199,19 @@ export default{
             height: 30vmin;
             // background-color: bisque;
             display: flex;
-            .ct{
+            .ct1{
                 margin: 20vmin;
                 margin-top: 2vmin;
-                margin-left: 30vmin;
+                margin-left: 20%;
                 font-size: 5vmin;
+                color: green;
+            }
+            .ct2{
+                margin: 20vmin;
+                margin-top: 2vmin;
+                margin-left: 20%;
+                font-size: 5vmin;
+                color: red;
             }
 
         }
@@ -205,7 +246,13 @@ export default{
                 margin-left: auto;
                 margin-right: 5%;
                 background-color: #F0ECE5;
+                opacity: 0.5;
+            }&:hover{
+                .btn{
+                    opacity: 1;
+                }
             }
+
             
         }
         .errText{

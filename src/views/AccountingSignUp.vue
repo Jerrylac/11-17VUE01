@@ -1,6 +1,4 @@
 <script>
-// import Accountinglogin from '../views/Accountinglogin.vue'
-// import Accounting from '../views/Accounting.vue'
 export default{
     data(){
         return{
@@ -11,70 +9,51 @@ export default{
             accArr:""
         }
     },
+    mounted(){
+        // this.dataGO()
+    },
     methods:{
         goAccounting(){
             this.accArr=false
             this.$emit("accGo",this.accArr)
         },
+        saveData(){
+            
+            if(JSON.parse(localStorage.getItem("costs"))!==null){
+                this.arr=JSON.parse(localStorage.getItem("costs"))
+            }else{
+                this.arr=[]
+            }
+            this.arr.push({acc:this.acc,paw:this.paw,test:false})
+            this.$emit("orange",this.arr)
+            localStorage.setItem("costs",JSON.stringify(this.arr))
+        },
         dataGO(){
             const inpSign=document.querySelectorAll(".inpSign")
-            let str=""
-            let dataCosts=JSON.parse(localStorage.getItem("costs"))
-            if(this.acc==""){
-                console.log("帳號未輸入");
+            const saved=JSON.parse(localStorage.getItem("costs"))||[]
+            // console.log(saved);
+            if(this.acc==""||this.paw==""||this.chPaw==""){
+                window.alert("有資料尚未輸入");
             }
-            if(this.paw==""){
-                console.log("密碼未輸入");  
+            else{
+                
+                saved.forEach(item=>{
+                    console.log(item.acc);
+                    if(item.acc==this.acc){
+                        window.alert("已有該帳號請從新輸入")
+                        this.acc=""
+                        this.paw=""
+                        this.chPaw=""
+                    }else if(this.paw!=this.chPaw){
+                        window.alert("請確認密碼是否正確");
+                        this.chPaw=""
+                    }else{
+                        this.saveData()
+                    }
+                })
             }
-            if(this.chPaw==""){
-                console.log("請輸入確認密碼");
-            }else{
-                if(this.paw!=this.chPaw){
-                    console.log("請確認密碼是否正確");
-                }else{
-                    dataCosts.forEach(item=>{
-                        if(item.acc==this.acc){
-                            console.log("該帳號已存在");
-                        }else{
-                            this.arr.push({acc:this.acc,paw:this.paw,test:false})
-                            this.$emit("orange",this.arr)
-                            localStorage.setItem("costs",JSON.stringify(this.arr))
-                        }
-                        
-                    })
-                }
-            }
-            // console.log(dataCosts);
-            // if(this.acc==""){
-            //     console.log("帳號未輸入");
-            // }
-            // if(this.paw=="")
-            // {
-            //     console.log("密碼未輸入");
-            // }
-            // if(this.chPaw=="")
-            // {
-            //     console.log("請輸入確認密碼");
-            // }else{
-            //     if(this.paw!=this.chPaw){
-            //         console.log("請確認密碼是否正確");
-            //     }else{
-            //         this.arr.push({acc:this.acc,paw:this.paw,test:false})
-            //         this.$emit("orange",this.arr)
-                    
-            //         // this.acc=""
-            //         // this.paw=""
-            //         // this.chPaw=""
-            //     }
-            // }
-            
-            // this.$emit("orange",this.paw)
         }
     },
-    // components:{
-    //     Accountinglogin,
-    //     Accounting
-    // }
 }
 </script>
 <template>

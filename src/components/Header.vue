@@ -34,6 +34,7 @@ export default{
 <div class="headerSowh">
     <RouterLink to="/Emit" class="link" >Emit</RouterLink>
     <RouterLink to="/DataFlow" class="link" >DataFlow</RouterLink>
+    <RouterLink to="/ProvideAndInject" class="link" >ProvideAndInject</RouterLink>
 
 </div>
 <span> {{ location }}</span>
