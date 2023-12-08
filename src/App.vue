@@ -18,13 +18,15 @@ import Header from './components/Header.vue'
 
 .header{
   width: 100vw;
-  height: 15vh;
+  height: 10vmin;
 }
 .content{
   width: 100vmax;
   height: 100vmax;
-  background-color: #635985;
+  padding-top: 10vmin;
+  background-color: #4F4557;
   text-align: center;
   color: #fff;
+  margin-top: 0px;
 }
 </style>

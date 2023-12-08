@@ -114,12 +114,52 @@ const router = createRouter({
       component: () => import('../views/DataFlow.vue')
     },
     {
+      path: '/Vslot',
+      name: 'Vslot',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/Vslot.vue')
+    },
+    {
       path: '/ProvideAndInject',
       name: 'ProvideAndInject',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/ProvideAndInject.vue')
+    },
+    {
+      path: '/User/:userId',
+      name: 'User',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/User.vue'),
+      props:true
+    },
+    {
+      path: '/RouteFam',
+      name: 'RouteFam',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/RouteFam.vue'),
+      children:[
+        {
+        path: 'RouteChild1',
+        component: () => import('../components/RouteChild1.vue'),
+        },
+        {
+        path: 'RouteChild2',
+        component: () => import('../components/RouteChild2.vue'),
+        }
+      ]
+    },
+    {
+      path:"/:patMatch(.*)*",
+      name:"NotFound",
+      component: () => import('../views/NotFound.vue'),
     }
 
     
